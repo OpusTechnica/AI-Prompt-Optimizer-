@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt Perfect AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        /* Light Theme Palette */
+        --bg-color-light: #f8fafc; /* slate-50 */
+        --card-bg-color: #ffffff; /* white */
+        --card-border-color: #e2e8f0; /* slate-200 */
+        --focus-glow-color: rgba(59, 130, 246, 0.5);
+        --text-primary: #0f172a;      /* slate-900 */
+        --text-secondary: #334155;    /* slate-700 */
+        --text-tertiary: #64748b;     /* slate-500 */
+        --text-accent: #2563eb;       /* blue-600 */
+        --text-success: #166534;      /* green-800 */
+        --text-danger-hover: #dc2626; /* red-600 */
+
+        --btn-secondary-outline-bg: #ffffff;
+        --btn-secondary-outline-text: #1f2937; /* slate-800 for high contrast */
+        --btn-secondary-outline-border: #d1d5db; /* gray-300 */
+        --btn-secondary-outline-hover-bg: #f9fafb; /* gray-50 */
+        --btn-secondary-outline-hover-border: #9ca3af; /* gray-400 */
+        
+        --btn-secondary-fill-bg: #ffffff;
+        --btn-secondary-fill-text: #1f2937;
+        --btn-secondary-fill-border: #d1d5db;
+        --btn-secondary-fill-hover-bg: #f9fafb;
+        --btn-secondary-fill-hover-border: #9ca3af;
+
+        --tag-bg: #e5e7eb; /* gray-200 */
+        --tag-text: #1f2937; /* slate-800 */
+      }
+
+      html.dark {
+        /* Dark Theme Palette */
+        --bg-color-1-dark: #020617; /* slate-950 */
+        --bg-color-2-dark: #1e293b; /* slate-800 */
+        --bg-color-3-dark: #0f172a; /* slate-900 */
+        --bg-color-4-dark: #334155; /* slate-700 */
+        --card-bg-color-dark: rgba(30, 41, 59, 0.6); /* slate-800/60 */
+        --card-border-color-dark: rgba(51, 65, 85, 0.7); /* slate-700/70 */
+        --focus-glow-color: rgba(59, 130, 246, 0.3);
+        --text-primary: #f1f5f9;      /* slate-100 */
+        --text-secondary: #cbd5e1;    /* slate-300 */
+        --text-tertiary: #94a3b8;     /* slate-400 */
+        --text-accent: #60a5fa;       /* blue-400 */
+        --text-success: #4ade80;      /* green-400 */
+        --text-danger-hover: #f87171; /* red-400 */
+
+        --btn-secondary-outline-bg: #374151; /* gray-700 */
+        --btn-secondary-outline-text: #f3f4f6; /* gray-100 */
+        --btn-secondary-outline-border: #4b5563; /* gray-600 */
+        --btn-secondary-outline-hover-bg: #4b5563; /* gray-600 */
+        --btn-secondary-outline-hover-border: #6b7280; /* gray-500 */
+        
+        --btn-secondary-fill-bg: #374151;
+        --btn-secondary-fill-text: #f3f4f6;
+        --btn-secondary-fill-border: transparent;
+        --btn-secondary-fill-hover-bg: #4b5563;
+        --btn-secondary-fill-hover-border: transparent;
+
+        --tag-bg: #3730a3; /* indigo-800 */
+        --tag-text: #c7d2fe; /* indigo-200 */
+      }
+      
+      /* New Text utility classes */
+      .text-primary { color: var(--text-primary); }
+      .text-secondary { color: var(--text-secondary); }
+      .text-tertiary { color: var(--text-tertiary); }
+      .text-accent { color: var(--text-accent); }
+      .text-success { color: var(--text-success); }
+      .hover-text-danger:hover { color: var(--text-danger-hover); }
+
+      /* New Button utility classes */
+      .btn-secondary-outline {
+        background-color: var(--btn-secondary-outline-bg);
+        color: var(--btn-secondary-outline-text);
+        border-color: var(--btn-secondary-outline-border);
+      }
+      .btn-secondary-outline:hover {
+        background-color: var(--btn-secondary-outline-hover-bg);
+        border-color: var(--btn-secondary-outline-hover-border);
+      }
+      .btn-secondary-fill {
+        background-color: var(--btn-secondary-fill-bg);
+        color: var(--btn-secondary-fill-text);
+        border: 1px solid var(--btn-secondary-fill-border);
+      }
+      .btn-secondary-fill:hover {
+        background-color: var(--btn-secondary-fill-hover-bg);
+        border-color: var(--btn-secondary-fill-hover-border);
+      }
+
+      /* New Tag utility class */
+      .category-tag {
+        background-color: var(--tag-bg);
+        color: var(--tag-text);
+      }
+      
+      body {
+        font-family: 'Inter', sans-serif;
+        transition: color 0.3s, background-color 0.3s;
+        color: var(--text-secondary); /* Set a sensible default text color */
+      }
+
+      /* Light Mode Body */
+      html:not(.dark) body {
+        background-color: var(--bg-color-light);
+      }
+      
+      /* Dark Mode Body */
+      html.dark body {
+        background: linear-gradient(225deg, var(--bg-color-1-dark), var(--bg-color-2-dark), var(--bg-color-3-dark), var(--bg-color-4-dark));
+        background-size: 400% 400%;
+        animation: gradient-animation 15s ease infinite;
+      }
+
+      @keyframes gradient-animation {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      
+      .glass-card {
+        transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+      }
+
+      /* Light mode card: solid with shadow */
+      html:not(.dark) .glass-card {
+        background-color: var(--card-bg-color);
+        border: 1px solid var(--card-border-color);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      }
+
+      /* Dark mode card: glassmorphism */
+      html.dark .glass-card {
+        background-color: var(--card-bg-color-dark);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--card-border-color-dark);
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      }
+      
+      .textarea-glow-focus:focus {
+        outline: none;
+        border-color: #3b82f6; /* focus:border-blue-500 */
+        box-shadow: 0 0 15px var(--focus-glow-color);
+      }
+      
+      @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      @keyframes slide-up {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      .animate-fade-in {
+        animation: fade-in 0.6s ease-out forwards;
+      }
+      
+      .animate-slide-up {
+        animation: slide-up 0.6s ease-out forwards;
+      }
+
+      /* Delay helper classes */
+      .animation-delay-200 { animation-delay: 200ms; }
+      .animation-delay-400 { animation-delay: 400ms; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.17.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
